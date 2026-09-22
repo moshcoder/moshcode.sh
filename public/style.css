@@ -117,6 +117,12 @@ h1 {
 }
 .copy:hover { background: var(--lime); color: #000; }
 .copy[data-done="1"] { background: var(--lime); color: #000; }
+/* On a phone the install line is wider than the screen. Wrapping beats a
+   scrollbar here: the copy button means nobody has to select the text. */
+@media (max-width: 560px) {
+  .install { align-items: stretch; }
+  .install code { white-space: normal; overflow-wrap: anywhere; overflow-x: visible; }
+}
 
 /* ── stats ───────────────────────────────────────────────────────── */
 .stats { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 40px; margin: 34px 0 0; padding: 0; }
