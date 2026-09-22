@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="20%" r="70%">
+      <stop offset="0%" stop-color="#9ef01a" stop-opacity="0.20"/>
+      <stop offset="100%" stop-color="#9ef01a" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="64" height="64" patternUnits="userSpaceOnUse">
+      <path d="M64 0H0v64" fill="none" stroke="#1f2123" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="#0a0a0a"/>
+  <rect width="1200" height="630" fill="url(#grid)" opacity="0.6"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <g transform="translate(88,120)">
+    <g fill="#9ef01a">
+      <rect x="0" y="0" width="14" height="56" rx="3"/>
+      <rect x="23" y="0" width="14" height="34" rx="3"/>
+      <rect x="46" y="0" width="15" height="56" rx="3"/>
+    </g>
+    <text x="80" y="44" font-family="ui-monospace,Menlo,Consolas,monospace" font-size="42" font-weight="700" fill="#ececec">moshcode</text>
+  </g>
+  <text x="88" y="326" font-family="system-ui,Helvetica,Arial,sans-serif" font-size="74" font-weight="800" letter-spacing="-2.4" fill="#ececec">Drive every coding agent</text>
+  <text x="88" y="410" font-family="system-ui,Helvetica,Arial,sans-serif" font-size="74" font-weight="800" letter-spacing="-2.4" fill="#9ef01a">from one CLI.</text>
+  <rect x="88" y="466" width="700" height="66" rx="10" fill="#101112" stroke="#1f2123"/>
+  <text x="112" y="507" font-family="ui-monospace,Menlo,Consolas,monospace" font-size="24" fill="#ececec">curl -fsSL https://moshcode.sh/install.sh | sh</text>
+  <text x="88" y="576" font-family="ui-monospace,Menlo,Consolas,monospace" font-size="21" fill="#7cbd16">we code in /tmp as root · we use cli only · everything we build has a tui</text>
+</svg>

@@ -1,0 +1,365 @@
+{
+  "source": "https://raw.githubusercontent.com/moshcoder/moshcode/master/README.md",
+  "groups": [
+    "engines",
+    "runtime",
+    "extend",
+    "script",
+    "account",
+    "hosting",
+    "arcade",
+    "system",
+    "tools",
+    "business"
+  ],
+  "commands": [
+    {
+      "name": "agents",
+      "aliases": [],
+      "group": "engines",
+      "summary": "list engines, open their agent view, or launch autonomously"
+    },
+    {
+      "name": "start",
+      "aliases": [],
+      "group": "engines",
+      "summary": "launch an engine with its native defaults"
+    },
+    {
+      "name": "herd",
+      "aliases": [],
+      "group": "runtime",
+      "summary": "run agent sessions that outlive this terminal"
+    },
+    {
+      "name": "swarm",
+      "aliases": [],
+      "group": "runtime",
+      "summary": "one task, a herd of agents, one answer — plan, fan out, verify, synthesise (PRD 0015)"
+    },
+    {
+      "name": "fleet",
+      "aliases": [],
+      "group": "runtime",
+      "summary": "the OpenFleet sysop tool: open a fleet, cap it, see the tree, stop a swarm, read the ledger (PRD 0016)"
+    },
+    {
+      "name": "ps",
+      "aliases": [],
+      "group": "runtime",
+      "summary": "list herd sessions and what each one is doing"
+    },
+    {
+      "name": "cost",
+      "aliases": [
+        "usage"
+      ],
+      "group": "runtime",
+      "summary": "what each session is spending, read from the engines' own logs"
+    },
+    {
+      "name": "attach",
+      "aliases": [],
+      "group": "runtime",
+      "summary": "attach this terminal to a herd session"
+    },
+    {
+      "name": "kill",
+      "aliases": [],
+      "group": "runtime",
+      "summary": "end a herd session"
+    },
+    {
+      "name": "wait",
+      "aliases": [],
+      "group": "runtime",
+      "summary": "block until a session is blocked, done, or idle"
+    },
+    {
+      "name": "restore",
+      "aliases": [],
+      "group": "runtime",
+      "summary": "rebuild the herd's sessions after a reboot"
+    },
+    {
+      "name": "ssh",
+      "aliases": [],
+      "group": "runtime",
+      "summary": "persistent SSH workspaces — one connection, many clean commands"
+    },
+    {
+      "name": "install",
+      "aliases": [],
+      "group": "engines",
+      "summary": "install an engine or workflow tool"
+    },
+    {
+      "name": "uninstall",
+      "aliases": [
+        "remove"
+      ],
+      "group": "engines",
+      "summary": "take an engine or workflow tool off this machine"
+    },
+    {
+      "name": "upgrade",
+      "aliases": [
+        "update"
+      ],
+      "group": "engines",
+      "summary": "update moshcode, engines, or tools"
+    },
+    {
+      "name": "mcp",
+      "aliases": [],
+      "group": "extend",
+      "summary": "register and inspect MCP servers"
+    },
+    {
+      "name": "skill",
+      "aliases": [
+        "skills"
+      ],
+      "group": "extend",
+      "summary": "install and inspect agent skills"
+    },
+    {
+      "name": "prd",
+      "aliases": [],
+      "group": "script",
+      "summary": "publish or list product requirement documents"
+    },
+    {
+      "name": "login",
+      "aliases": [],
+      "group": "account",
+      "summary": "authenticate with app.moshcode.sh"
+    },
+    {
+      "name": "whoami",
+      "aliases": [],
+      "group": "account",
+      "summary": "show the logged-in account"
+    },
+    {
+      "name": "logout",
+      "aliases": [],
+      "group": "account",
+      "summary": "clear the logged-in account"
+    },
+    {
+      "name": "save",
+      "aliases": [],
+      "group": "account",
+      "summary": "save this machine's pit settings to your account"
+    },
+    {
+      "name": "load",
+      "aliases": [],
+      "group": "account",
+      "summary": "bring your saved pit settings onto this machine"
+    },
+    {
+      "name": "console",
+      "aliases": [],
+      "group": "account",
+      "summary": "serve or connect to the browser terminal"
+    },
+    {
+      "name": "dns",
+      "aliases": [],
+      "group": "hosting",
+      "summary": "resolve Moshpit names on this machine"
+    },
+    {
+      "name": "name",
+      "aliases": [],
+      "group": "hosting",
+      "summary": "prove you hold a Moshpit name, so an app can use it as your identity"
+    },
+    {
+      "name": "doh",
+      "aliases": [],
+      "group": "hosting",
+      "summary": "run the DNS-over-HTTPS resolver"
+    },
+    {
+      "name": "site",
+      "aliases": [
+        "serve"
+      ],
+      "group": "hosting",
+      "summary": "install web-server config for a Moshpit name"
+    },
+    {
+      "name": "template",
+      "aliases": [
+        "templates"
+      ],
+      "group": "hosting",
+      "summary": "scaffold a stack for a Moshpit-hosted service"
+    },
+    {
+      "name": "shorten",
+      "aliases": [
+        "short",
+        "link"
+      ],
+      "group": "hosting",
+      "summary": "mint a short link on the pit — /f/<code> follows to your url"
+    },
+    {
+      "name": "games",
+      "aliases": [
+        "game",
+        "arcade"
+      ],
+      "group": "arcade",
+      "summary": "the moshcode arcade — twenty-two games, no menus"
+    },
+    {
+      "name": "pwd",
+      "aliases": [
+        "where"
+      ],
+      "group": "system",
+      "summary": "show the current directory and git context"
+    },
+    {
+      "name": "engines",
+      "aliases": [],
+      "group": "engines",
+      "summary": "list engines and installation status, or apply an engine's settings defaults"
+    },
+    {
+      "name": "tools",
+      "aliases": [],
+      "group": "tools",
+      "summary": "list workflow tools and installation status"
+    },
+    {
+      "name": "trade",
+      "aliases": [],
+      "group": "tools",
+      "summary": "look up markets and trade through Alpaca"
+    },
+    {
+      "name": "stocks",
+      "aliases": [
+        "advisor"
+      ],
+      "group": "tools",
+      "summary": "equity research from advis0r.com"
+    },
+    {
+      "name": "crypto",
+      "aliases": [
+        "coins"
+      ],
+      "group": "tools",
+      "summary": "crypto market data from advis0r.com"
+    },
+    {
+      "name": "news",
+      "aliases": [],
+      "group": "tools",
+      "summary": "headlines from your feeds, or a search"
+    },
+    {
+      "name": "rss",
+      "aliases": [],
+      "group": "tools",
+      "summary": "read the same headlines in a full-screen reader"
+    },
+    {
+      "name": "timer",
+      "aliases": [],
+      "group": "business",
+      "summary": "track time — on, off, and what it added up to"
+    },
+    {
+      "name": "client",
+      "aliases": [
+        "business",
+        "merchant",
+        "customer"
+      ],
+      "group": "business",
+      "summary": "who the work is for — clients, businesses, merchants"
+    },
+    {
+      "name": "team",
+      "aliases": [
+        "teams"
+      ],
+      "group": "business",
+      "summary": "who may do what on this machine"
+    },
+    {
+      "name": "rate",
+      "aliases": [
+        "rates"
+      ],
+      "group": "business",
+      "summary": "what an hour of agent time costs"
+    },
+    {
+      "name": "billing",
+      "aliases": [
+        "invoice"
+      ],
+      "group": "business",
+      "summary": "turn tracked time into an invoice"
+    },
+    {
+      "name": "payments",
+      "aliases": [],
+      "group": "business",
+      "summary": "the rail invoices go out on"
+    },
+    {
+      "name": "plugin",
+      "aliases": [
+        "plugins"
+      ],
+      "group": "extend",
+      "summary": "install moshcode's slash commands into Claude Code"
+    },
+    {
+      "name": "commands",
+      "aliases": [],
+      "group": "script",
+      "summary": "list built-in moshscript commands"
+    },
+    {
+      "name": "completion",
+      "aliases": [],
+      "group": "extend",
+      "summary": "print a shell completion script"
+    },
+    {
+      "name": "run",
+      "aliases": [],
+      "group": "script",
+      "summary": "run a moshscript"
+    },
+    {
+      "name": "help",
+      "aliases": [
+        "--help",
+        "-h"
+      ],
+      "group": "system",
+      "summary": "show command help"
+    },
+    {
+      "name": "version",
+      "aliases": [
+        "--version",
+        "-v"
+      ],
+      "group": "system",
+      "summary": "show the installed version"
+    }
+  ]
+}
