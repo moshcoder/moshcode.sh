@@ -2,6 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { createApp } from '../src/server.mjs';
+import { POSTS } from '../src/posts.mjs';
 import { parseCommands, extractTable } from '../scripts/sync-commands.mjs';
 
 const COMMANDS = JSON.parse(readFileSync(new URL('../data/commands.json', import.meta.url), 'utf8'));
@@ -101,4 +102,57 @@ y`);
   assert.deepEqual(parsed, [
     { name: 'ps', aliases: ['where'], group: 'system', summary: 'show things' },
   ]);
+});
+
+test('blog index lists the post and links the feed', async () => {
+  const res = await get('/blog');
+  assert.equal(res.status, 200);
+  assert.match(res.body, /<link rel="canonical" href="https:\/\/moshcode\.sh\/blog">/);
+  for (const post of POSTS) assert.match(res.body, new RegExp(`/blog/${post.slug}`));
+  assert.match(res.body, /application\/rss\+xml/);
+});
+
+test('every post renders with a canonical url and its own schema', async () => {
+  for (const post of POSTS) {
+    const res = await get(`/blog/${post.slug}`);
+    assert.equal(res.status, 200);
+    assert.match(res.body, new RegExp(`<link rel="canonical" href="https://moshcode.sh/blog/${post.slug}">`));
+    assert.match(res.body, /"@type":"BlogPosting"/);
+  }
+});
+
+test('the feed is rss, not a post lookup', async () => {
+  const res = await get('/blog/rss.xml');
+  assert.equal(res.status, 200);
+  assert.match(res.headers.get('content-type'), /application\/rss\+xml/);
+  assert.match(res.body, /<rss version="2.0"/);
+  for (const post of POSTS)
+    assert.match(res.body, new RegExp(`<link>https://moshcode.sh/blog/${post.slug}</link>`));
+});
+
+test('an unknown post slug 404s instead of rendering an empty page', async () => {
+  const res = await get('/blog/no-such-post');
+  assert.equal(res.status, 404);
+  assert.match(res.body, /Nothing at that name/);
+});
+
+test('the sitemap carries the blog index and every post', async () => {
+  const res = await get('/sitemap.xml');
+  assert.match(res.body, /<loc>https:\/\/moshcode\.sh\/blog<\/loc>/);
+  for (const post of POSTS)
+    assert.match(res.body, new RegExp(`<loc>https://moshcode.sh/blog/${post.slug}</loc>`));
+});
+
+test('the nav reaches the Moshpit Manager from every page', async () => {
+  for (const path of ['/', '/commands', '/blog']) {
+    const res = await get(path);
+    assert.match(res.body, /href="https:\/\/app\.moshcode\.sh\/pit"/);
+    assert.match(res.body, /href="\/blog"/);
+  }
+});
+
+test('nav section links are absolute, so they work off the home page', async () => {
+  const res = await get('/commands');
+  assert.match(res.body, /href="\/#herd"/);
+  assert.doesNotMatch(res.body, /href="#herd"/);
 });

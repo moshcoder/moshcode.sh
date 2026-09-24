@@ -3,14 +3,16 @@
 
 import { SITE, NAV, ENGINES, STATS, SECTIONS, FOOTER_LINKS } from './content.mjs';
 
-const esc = (s) =>
+// head/foot/terminal/installBox/esc are exported for src/blog.mjs, which builds
+// the blog pages out of the same chrome rather than a second set of markup.
+export const esc = (s) =>
   String(s).replace(
     /[&<>"']/g,
     (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c],
   );
 
 /** A terminal pane. `raw` is verbatim output; `lines` is a prompt-aware script. */
-function terminal(t) {
+export function terminal(t) {
   const body = t.raw
     ? esc(t.raw)
     : t.lines
@@ -43,7 +45,7 @@ function section(s, i) {
 </section>`;
 }
 
-function head({ title, description, path, extraHead = '' }) {
+export function head({ title, description, path, extraHead = '' }) {
   const canonical = `https://${SITE.domain}${path}`;
   return `<!doctype html>
 <html lang="en">
@@ -74,14 +76,17 @@ ${extraHead}
 <header class="nav">
   <div class="wrap nav-grid">
     <a class="brand" href="/"><span class="brand-mark" aria-hidden="true">▚</span> moshcode</a>
-    <nav aria-label="Primary">${NAV.map((n) => `<a href="${esc(n.href)}">${esc(n.label)}</a>`).join('')}</nav>
+    <nav aria-label="Primary">${NAV.map(
+      (n) =>
+        `<a href="${esc(n.href)}"${n.external ? ' rel="noopener"' : ''}>${esc(n.label)}${n.external ? '&nbsp;↗' : ''}</a>`,
+    ).join('')}</nav>
     <a class="nav-cta" href="${esc(SITE.repo)}">GitHub&nbsp;↗</a>
   </div>
 </header>
 <main id="main">`;
 }
 
-function foot() {
+export function foot() {
   return `</main>
 <footer class="foot">
   <div class="wrap foot-grid">
@@ -103,7 +108,7 @@ function foot() {
 </html>`;
 }
 
-function installBox(extraClass = '') {
+export function installBox(extraClass = '') {
   return `<div class="install ${extraClass}">
   <code id="install-cmd">${esc(SITE.install)}</code>
   <button class="copy" data-copy="#install-cmd" type="button">copy</button>
@@ -222,7 +227,9 @@ export function renderLlmsTxt(data) {
 Install: ${SITE.install}
 Source: ${SITE.repo}
 Registry (Moshpit names): ${SITE.pit}
+Moshpit Manager (claim a name): ${SITE.manager}
 Account: ${SITE.app}
+Blog: https://${SITE.domain}/blog (RSS: https://${SITE.domain}/blog/rss.xml)
 
 ## What it is
 

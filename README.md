@@ -25,6 +25,9 @@ npm test            # node --test
 | `/` | the landing page |
 | `/commands` | all 51 commands, grouped |
 | `/commands.json` | the same table as data |
+| `/blog` | the post index |
+| `/blog/<slug>` | one post |
+| `/blog/rss.xml` | the feed (`/blog/feed.xml` is the same thing) |
 | `/llms.txt` | a plain-text brief for agents |
 | `/install.sh` | **302** to `https://moshcoding.com/install.sh` |
 | `/healthz` | Railway's health check |
@@ -60,6 +63,19 @@ All copy lives in `src/content.mjs` — hero, sections, terminal panes and foote
 links, as data. `src/site.mjs` is layout only, so a wording change never means
 touching markup. Every terminal pane on the page is real output from the
 moshcode README rather than an invented screenshot.
+
+## The blog
+
+Posts live in `src/posts.mjs`, one object each, with the body as an ordered list
+of blocks (`h2`, `p`, `list`, `terminal`). `src/blog.mjs` renders the index, the
+post page and the RSS feed from that array using the same chrome as the rest of
+the site. Adding an entry is the whole publish: the index, the feed, the sitemap
+and the canonical URL all come off it, and a test asserts every post is reachable
+and carries its own canonical tag.
+
+Paragraph and list text is authored markup and is passed through unescaped so a
+sentence can carry a link. Terminal panes are escaped, so pasted output stays
+verbatim and inert.
 
 ## Deploy
 
