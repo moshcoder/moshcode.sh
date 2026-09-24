@@ -11,15 +11,20 @@ export const SITE = {
   repo: 'https://github.com/moshcoder/moshcode',
   pit: 'https://pit.moshcode.sh',
   app: 'https://app.moshcode.sh',
+  // The Moshpit Manager: claim a name, see the ones you hold, mint a short link.
+  manager: 'https://app.moshcode.sh/pit',
   creed: 'we code in /tmp as root · we use cli only · everything we build has a tui',
 };
 
+// Section links are absolute (`/#herd`, not `#herd`) so the nav still works
+// from /commands and /blog, where a bare fragment points at nothing.
 export const NAV = [
-  { href: '#engines', label: 'engines' },
-  { href: '#herd', label: 'herd' },
-  { href: '#swarm', label: 'swarm' },
-  { href: '#cost', label: 'cost' },
+  { href: '/#herd', label: 'herd' },
+  { href: '/#swarm', label: 'swarm' },
+  { href: '/#cost', label: 'cost' },
   { href: '/commands', label: 'commands' },
+  { href: '/blog', label: 'blog' },
+  { href: 'https://app.moshcode.sh/pit', label: 'moshpit manager', external: true },
 ];
 
 export const ENGINES = [
@@ -262,6 +267,7 @@ export const FOOTER_LINKS = [
     links: [
       { label: 'GitHub', href: 'https://github.com/moshcoder/moshcode' },
       { label: 'Commands', href: '/commands' },
+      { label: 'Blog', href: '/blog' },
       { label: 'Install script', href: '/install.sh' },
       { label: 'For agents (llms.txt)', href: '/llms.txt' },
     ],
@@ -269,6 +275,7 @@ export const FOOTER_LINKS = [
   {
     heading: 'the Pit',
     links: [
+      { label: 'Moshpit Manager', href: 'https://app.moshcode.sh/pit' },
       { label: 'pit.moshcode.sh', href: 'https://pit.moshcode.sh' },
       { label: 'app.moshcode.sh', href: 'https://app.moshcode.sh' },
       { label: 'Moshpit DNS', href: 'https://dns.moshcode.sh/dns-query' },

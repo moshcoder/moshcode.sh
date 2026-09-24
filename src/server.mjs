@@ -3,6 +3,8 @@ import { readFileSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { renderHome, renderCommands, renderNotFound, renderLlmsTxt } from './site.mjs';
+import { renderBlogIndex, renderPost, renderFeed } from './blog.mjs';
+import { POSTS_BY_SLUG, POSTS_NEWEST_FIRST } from './posts.mjs';
 import { SITE } from './content.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -15,9 +17,12 @@ const VERSION = JSON.parse(readFileSync(resolve(ROOT, 'package.json'), 'utf8')).
 // third copy: `curl -fsSL` follows it, and there is nothing here to drift.
 const INSTALLER = 'https://moshcoding.com/install.sh';
 
+// Static pages; every post is appended to this list when the sitemap is built,
+// so publishing a post in src/posts.mjs is the whole job.
 const PAGES = [
   { path: '/', changefreq: 'weekly', priority: '1.0' },
   { path: '/commands', changefreq: 'weekly', priority: '0.8' },
+  { path: '/blog', changefreq: 'weekly', priority: '0.8' },
 ];
 
 export function createApp() {
@@ -52,6 +57,22 @@ export function createApp() {
     res.set('Cache-Control', 'public, max-age=300').json(COMMANDS),
   );
 
+  app.get('/blog', (_req, res) => html(res, renderBlogIndex()));
+
+  // Ahead of /blog/:slug, or the feed would be looked up as a post.
+  app.get(['/blog/rss.xml', '/blog/feed.xml'], (_req, res) =>
+    res
+      .type('application/rss+xml; charset=utf-8')
+      .set('Cache-Control', 'public, max-age=300')
+      .send(renderFeed()),
+  );
+
+  app.get('/blog/:slug', (req, res, next) => {
+    const post = POSTS_BY_SLUG.get(req.params.slug);
+    if (!post) return next();
+    return html(res, renderPost(post));
+  });
+
   app.get(['/install.sh', '/install'], (_req, res) => res.redirect(302, INSTALLER));
 
   app.get('/llms.txt', (_req, res) =>
@@ -68,7 +89,15 @@ export function createApp() {
   );
 
   app.get('/sitemap.xml', (_req, res) => {
-    const urls = PAGES.map(
+    const pages = [
+      ...PAGES,
+      ...POSTS_NEWEST_FIRST.map((p) => ({
+        path: `/blog/${p.slug}`,
+        changefreq: 'monthly',
+        priority: '0.7',
+      })),
+    ];
+    const urls = pages.map(
       (p) =>
         `  <url><loc>https://${SITE.domain}${p.path}</loc><changefreq>${p.changefreq}</changefreq><priority>${p.priority}</priority></url>`,
     ).join('\n');
