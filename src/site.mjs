@@ -69,6 +69,7 @@ export function head({ title, description, path, extraHead = '' }) {
 <link rel="icon" href="/mark.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/tokens.css">
 <link rel="stylesheet" href="/style.css">
+<script data-site="7fdf1cb0-2240-4709-8896-63262cb35f7f" src="https://crawlproof.com/stats.js" async></script>
 ${extraHead}
 </head>
 <body>
