@@ -13,9 +13,9 @@ the parking lot.
 
 ```sh
 bun install
-npm start           # http://localhost:3000
+bun start           # http://localhost:3000
 bun run dev         # same, with --watch
-npm test            # node --test
+bun test            # bun test
 ```
 
 ## What it serves
