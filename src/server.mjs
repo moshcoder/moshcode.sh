@@ -49,7 +49,7 @@ export function createApp() {
   const html = (res, body) =>
     res.type('html').set('Cache-Control', 'public, max-age=300, must-revalidate').send(body);
 
-  app.get('/', (_req, res) => html(res, renderHome()));
+  app.get('/', (_req, res) => html(res, renderHome(COMMANDS)));
   app.get('/commands', (_req, res) => html(res, renderCommands(COMMANDS)));
 
   // The command table as data, for anything that would rather not parse HTML.

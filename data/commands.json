@@ -38,10 +38,22 @@
       "summary": "one task, a herd of agents, one answer — plan, fan out, verify, synthesise (PRD 0015)"
     },
     {
+      "name": "omarchy",
+      "aliases": [],
+      "group": "runtime",
+      "summary": "the herd on the Omarchy bar: the snapshot a QML widget polls, and the plugin around it (PRD 0017)"
+    },
+    {
       "name": "fleet",
       "aliases": [],
       "group": "runtime",
       "summary": "the OpenFleet sysop tool: open a fleet, cap it, see the tree, stop a swarm, read the ledger (PRD 0016)"
+    },
+    {
+      "name": "handoff",
+      "aliases": [],
+      "group": "runtime",
+      "summary": "move a conversation from one engine to another, with its history (PRD 0018)"
     },
     {
       "name": "ps",
@@ -158,6 +170,12 @@
       "aliases": [],
       "group": "account",
       "summary": "bring your saved pit settings onto this machine"
+    },
+    {
+      "name": "export",
+      "aliases": [],
+      "group": "account",
+      "summary": "operator only: export the app's users as CSV, optionally cleaned"
     },
     {
       "name": "console",

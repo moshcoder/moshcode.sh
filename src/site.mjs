@@ -116,7 +116,7 @@ export function installBox(extraClass = '') {
 </div>`;
 }
 
-export function renderHome() {
+export function renderHome(data) {
   return `${head({
     title: 'moshcode — a metal wrapper CLI for agentic coding',
     description: SITE.description,
@@ -151,7 +151,7 @@ ${SECTIONS.map(section).join('\n')}
     <h2>Push code. Start pits.</h2>
     <p class="lede">One line, and every agent on this machine answers to the same verbs.</p>
     ${installBox()}
-    <p class="muted small"><a href="/commands">All 51 commands</a> · <a href="${esc(SITE.repo)}">Read the source</a> · <a href="${esc(SITE.pit)}">Claim a Moshpit name</a></p>
+    <p class="muted small"><a href="/commands">All ${data.commands.length} commands</a> · <a href="${esc(SITE.repo)}">Read the source</a> · <a href="${esc(SITE.pit)}">Claim a Moshpit name</a></p>
   </div>
 </section>
 ${foot()}`;
