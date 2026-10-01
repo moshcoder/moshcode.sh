@@ -1,0 +1,27 @@
+name: ci
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  test:
+    name: install, test, boot (Bun)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version-file: package.json
+      - run: bun install --frozen-lockfile
+      - run: bun test
+      - name: Server answers under Bun
+        run: |
+          PORT=3000 bun src/server.mjs > /tmp/server.log 2>&1 &
+          for i in $(seq 1 20); do
+            curl -sf http://127.0.0.1:3000/healthz && exit 0
+            sleep 1
+          done
+          cat /tmp/server.log; exit 1

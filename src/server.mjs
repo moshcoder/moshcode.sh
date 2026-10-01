@@ -122,4 +122,6 @@ if (isMain) {
   const port = Number(process.env.PORT || 3000);
   const host = process.env.HOST || '0.0.0.0';
   createApp().listen(port, host, () => console.log(`moshcode.sh listening on ${host}:${port}`));
+  // PID 1 in the container: without a handler `docker stop` waits 10 s for SIGKILL.
+  for (const signal of ['SIGTERM', 'SIGINT']) process.on(signal, () => process.exit(0));
 }

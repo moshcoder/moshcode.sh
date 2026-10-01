@@ -12,9 +12,9 @@ the parking lot.
 ## Run it
 
 ```sh
-npm install
+bun install
 npm start           # http://localhost:3000
-npm run dev         # same, with --watch
+bun run dev         # same, with --watch
 npm test            # node --test
 ```
 
@@ -50,9 +50,9 @@ with a test. So the site cannot advertise a verb that does not exist, or miss on
 that does.
 
 ```sh
-npm run sync:commands                               # pull from GitHub
-MOSHCODE_README=../moshcode/README.md npm run sync:commands   # or a local checkout
-npm run check                                       # exit 1 if it is stale
+bun run sync:commands                               # pull from GitHub
+MOSHCODE_README=../moshcode/README.md bun run sync:commands   # or a local checkout
+bun run check                                       # exit 1 if it is stale
 ```
 
 Re-run it after a moshcode release that adds or renames a command.
