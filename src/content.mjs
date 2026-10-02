@@ -40,10 +40,13 @@ export const ENGINES = [
   { name: 'openagents', how: 'moshcode install openagents' },
 ];
 
-/** Numbers that are true of the CLI itself, not marketing rounding. */
+/**
+ * Numbers that are true of the CLI itself, not marketing rounding. A `value`
+ * of null is filled in by renderHome from data/commands.json.
+ */
 export const STATS = [
   { value: '10', label: 'engines it installs and drives' },
-  { value: '51', label: 'commands, generated from the dispatch table' },
+  { key: 'commands', value: null, label: 'commands, generated from the dispatch table' },
   { value: '22', label: 'games in the arcade' },
   { value: '0', label: 'dependencies — Node 18+ and nothing else' },
 ];
