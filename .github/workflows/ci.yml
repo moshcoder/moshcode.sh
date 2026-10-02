@@ -5,6 +5,11 @@ on:
     branches: [main]
   push:
     branches: [main]
+  # The CLI repo changes its command table without touching this one, so a
+  # daily run catches drift between site PRs.
+  schedule:
+    - cron: '17 6 * * *'
+  workflow_dispatch:
 
 jobs:
   test:
@@ -17,6 +22,8 @@ jobs:
           bun-version-file: package.json
       - run: bun install --frozen-lockfile
       - run: bun test
+      - name: data/commands.json matches the CLI's command table
+        run: bun run check
       - name: Server answers under Bun
         run: |
           PORT=3000 bun src/server.mjs > /tmp/server.log 2>&1 &

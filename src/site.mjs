@@ -130,7 +130,7 @@ export function renderHome(data) {
     ${installBox('install-hero')}
     <p class="muted small">Zero-dependency ESM — all it needs is Node.js 18+. Later: <code>… | sh -s -- update</code> to upgrade, <code>… | sh -s -- remove</code> to uninstall.</p>
     <ul class="stats">
-      ${STATS.map((s) => `<li><strong>${esc(s.value)}</strong><span>${esc(s.label)}</span></li>`).join('\n      ')}
+      ${STATS.map((s) => `<li><strong>${esc(s.key === 'commands' ? data.commands.length : s.value)}</strong><span>${esc(s.label)}</span></li>`).join('\n      ')}
     </ul>
   </div>
 </section>

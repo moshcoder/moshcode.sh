@@ -40,6 +40,11 @@ test('home page renders the install line and every engine', async () => {
 test('home page states the real command count', async () => {
   const res = await get('/');
   assert.match(res.body, new RegExp(`All ${COMMANDS.commands.length} commands`));
+  // The stats strip too: it said 51 while the table had 54.
+  assert.match(
+    res.body,
+    new RegExp(`<strong>${COMMANDS.commands.length}</strong><span>commands`),
+  );
 });
 
 test('commands page lists every command exactly once', async () => {

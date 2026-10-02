@@ -14,7 +14,7 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = resolve(ROOT, 'data/commands.json');
-const REMOTE = 'https://raw.githubusercontent.com/moshcoder/moshcode/master/README.md';
+const REMOTE = 'https://raw.githubusercontent.com/moshcoder/moshcode/main/README.md';
 
 const START = '<!-- COMMANDS:START -->';
 const END = '<!-- COMMANDS:END -->';
