@@ -95,6 +95,11 @@ export function foot() {
       <p class="brand"><span class="brand-mark" aria-hidden="true">▚</span> moshcode</p>
       <p class="creed">${esc(SITE.creed)}</p>
       <p class="muted">MIT licensed. Built by <a href="https://github.com/moshcoder">moshcoder</a>.</p>
+      <nav class="webring" aria-label="Profullstack webring">
+        <a href="https://rssamplifier.com/ring/profullstack/previous?from=https%3A%2F%2Fmoshcode.sh%2F" rel="prev">&lt;&lt;</a>
+        <a href="https://rssamplifier.com/ring/profullstack">Profullstack</a>
+        <a href="https://rssamplifier.com/ring/profullstack/next?from=https%3A%2F%2Fmoshcode.sh%2F" rel="next">&gt;&gt;</a>
+      </nav>
     </div>
     ${FOOTER_LINKS.map(
       (col) => `<div class="foot-col">
