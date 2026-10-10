@@ -82,6 +82,16 @@ export function createApp() {
       .send(renderLlmsTxt(COMMANDS)),
   );
 
+  // OpenWebring descriptor: membership in the Profullstack ring on rssamplifier.com.
+  app.get('/.well-known/openwebring.json', (_req, res) =>
+    res.set('Cache-Control', 'public, max-age=3600').json({
+      openwebring: '0.1',
+      site: { url: 'https://moshcode.sh/', name: 'moshcode.sh' },
+      made_by: 'both',
+      rings: [{ ring: 'https://rssamplifier.com/ring/profullstack', slug: 'moshcode-sh' }],
+    }),
+  );
+
   app.get('/robots.txt', (_req, res) =>
     res
       .type('text/plain; charset=utf-8')
