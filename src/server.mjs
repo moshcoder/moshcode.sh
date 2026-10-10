@@ -1,4 +1,6 @@
 import express from 'express';
+import { randomBytes } from 'node:crypto';
+import { footerHtml } from '@profullstack/footer';
 import { readFileSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -31,12 +33,14 @@ export function createApp() {
   app.set('etag', 'strong');
 
   app.use((_req, res, next) => {
+    // Per-response nonce for the one inline <style> the shared footer carries.
+    res.locals.nonce = randomBytes(16).toString('base64');
     res.set({
       'X-Content-Type-Options': 'nosniff',
       'Referrer-Policy': 'strict-origin-when-cross-origin',
       'Strict-Transport-Security': 'max-age=31536000; includeSubDomains',
       'Content-Security-Policy':
-        "default-src 'self'; script-src 'self' https://crawlproof.com; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://crawlproof.com; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'",
+        `default-src 'self'; script-src 'self' https://crawlproof.com; style-src 'self' 'nonce-${res.locals.nonce}'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://crawlproof.com; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'`,
       'Permissions-Policy': 'camera=(), microphone=(), geolocation=(), interest-cohort=()',
     });
     next();
@@ -46,8 +50,20 @@ export function createApp() {
     res.json({ status: 'ok', version: VERSION, commands: COMMANDS.commands.length }),
   );
 
-  const html = (res, body) =>
-    res.type('html').set('Cache-Control', 'public, max-age=300, must-revalidate').send(body);
+  // The shared Profullstack footer (copyright + webring), rendered per request
+  // from @profullstack/footer's @latest template (cached 1 h by the package)
+  // into the <!--pfs-footer--> slot every page's foot() leaves.
+  const withFooter = async (res, body) =>
+    body.replace(
+      '<!--pfs-footer-->',
+      await footerHtml({ site: 'https://moshcode.sh/', nonce: res.locals.nonce }),
+    );
+
+  const html = async (res, body) =>
+    res
+      .type('html')
+      .set('Cache-Control', 'public, max-age=300, must-revalidate')
+      .send(await withFooter(res, body));
 
   app.get('/', (_req, res) => html(res, renderHome(COMMANDS)));
   app.get('/commands', (_req, res) => html(res, renderCommands(COMMANDS)));
@@ -123,7 +139,7 @@ export function createApp() {
     }),
   );
 
-  app.use((_req, res) => res.status(404).type('html').send(renderNotFound()));
+  app.use(async (_req, res) => res.status(404).type('html').send(await withFooter(res, renderNotFound())));
   return app;
 }
 
