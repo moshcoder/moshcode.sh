@@ -237,19 +237,12 @@ h1 {
 }
 
 /* ── footer ──────────────────────────────────────────────────────── */
-.foot { padding: 52px 0 44px; background: var(--bg-alt); border-top: 1px solid var(--line-soft); }
-.foot-grid { display: grid; grid-template-columns: 1.6fr repeat(3, 1fr); gap: 32px; }
-.foot-brand .brand { font-size: 16px; margin: 0 0 10px; }
-.creed { font-family: var(--mono); font-size: 12.5px; color: var(--lime-dim); margin: 0 0 12px; max-width: 34ch; }
-.foot-brand .muted { font-size: 13.5px; margin: 0; }
-.foot-col { display: flex; flex-direction: column; gap: 9px; }
-.foot-head { font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; color: var(--muted); margin: 0 0 2px; text-transform: uppercase; }
-.foot-col a { font-size: 14px; color: var(--ink-2); text-decoration: none; }
-.foot-col a:hover { color: var(--lime); }
-.webring { display: flex; gap: 10px; margin: 12px 0 0; font-family: var(--mono); font-size: 12.5px; }
-.webring a { color: var(--muted); text-decoration: none; }
-.webring a:hover { color: var(--lime); }
-@media (max-width: 760px) { .foot-grid { grid-template-columns: 1fr 1fr; } }
+.foot { padding: 22px 0; background: var(--bg-alt); border-top: 1px solid var(--line-soft); }
+.foot-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 24px; }
+.foot-row .brand { font-size: 14px; margin: 0; }
+.foot-row nav { display: flex; flex-wrap: wrap; gap: 6px 18px; }
+.foot-row nav a { font-size: 14px; color: var(--ink-2); text-decoration: none; }
+.foot-row nav a:hover { color: var(--lime); }
 
 /* ── blog ────────────────────────────────────────────────────────── */
 .post-list { display: grid; gap: 26px; max-width: 760px; }
@@ -277,7 +270,7 @@ h1 {
 .prose .term { margin: 26px 0 28px; }
 @media (min-width: 900px) { .prose .term-wide { width: calc(100% + 160px); max-width: none; } }
 
-/* CrawlProof text_link frame above the footer: fluid, 40px, carries its own
+/* CrawlProof text_link frame at the top of the content: fluid, 40px, carries its own
    "Sponsored" mark. */
-.cp-ad { margin-top: 40px; margin-bottom: 40px; }
+.cp-ad { margin-top: 24px; margin-bottom: 24px; }
 .cp-ad iframe { display: block; width: 100%; height: 40px; border: 0; }

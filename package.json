@@ -1,8 +1,8 @@
 {
   "name": "moshcode.sh",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
-  "description": "moshcode.sh \u2014 the home page for moshcode, a metal wrapper CLI for agentic coding",
+  "description": "moshcode.sh — the home page for moshcode, a metal wrapper CLI for agentic coding",
   "type": "module",
   "license": "MIT",
   "scripts": {
@@ -13,7 +13,6 @@
     "check": "bun scripts/sync-commands.mjs --check"
   },
   "dependencies": {
-    "@profullstack/footer": "latest",
     "express": "5.1.0"
   },
   "packageManager": "bun@1.4.0"

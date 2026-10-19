@@ -84,11 +84,12 @@ ${extraHead}
     <a class="nav-cta" href="${esc(SITE.repo)}">GitHub&nbsp;↗</a>
   </div>
 </header>
-<main id="main">`;
+<main id="main">
+${adUnit()}`;
 }
 
 // One CrawlProof ad unit (slot 71955dcb, https://crawlproof.com/ads/slots) on
-// every public page, above the footer. This site's CSP allows no inline style
+// every public page, at the top of the content (never against the footer). This site's CSP allows no inline style
 // and only 'self' images, and ad.js renders into a srcdoc iframe that would
 // inherit that policy, so it uses the script-free cross-origin frame instead:
 // one frame-src entry, no third-party JS, nothing written to localStorage.
@@ -104,25 +105,15 @@ export function adUnit() {
 }
 
 export function foot() {
-  return `${adUnit()}
-</main>
+  return `</main>
 <footer class="foot">
-  <div class="wrap foot-grid">
-    <div class="foot-brand">
-      <p class="brand"><span class="brand-mark" aria-hidden="true">▚</span> moshcode</p>
-      <p class="creed">${esc(SITE.creed)}</p>
-      <p class="muted">MIT licensed. Built by <a href="https://github.com/moshcoder">moshcoder</a>.</p>
-    </div>
-    ${FOOTER_LINKS.map(
-      (col) => `<div class="foot-col">
-      <p class="foot-head">${esc(col.heading)}</p>
-      ${col.links.map((l) => `<a href="${esc(l.href)}">${esc(l.label)}</a>`).join('\n      ')}
-    </div>`,
-    ).join('\n    ')}
+  <div class="wrap foot-row">
+    <p class="brand"><span class="brand-mark" aria-hidden="true">▚</span> moshcode <span class="muted">· MIT licensed</span></p>
+    <nav aria-label="Footer">${FOOTER_LINKS.map((l) => `<a href="${esc(l.href)}">${esc(l.label)}</a>`).join('')}</nav>
   </div>
 </footer>
-<!--pfs-footer-->
 <script src="/app.js" defer></script>
+<!--pit-footer-->
 </body>
 </html>`;
 }

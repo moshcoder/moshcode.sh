@@ -265,33 +265,9 @@ while (alive) {
 ];
 
 export const FOOTER_LINKS = [
-  {
-    heading: 'moshcode',
-    links: [
-      { label: 'GitHub', href: 'https://github.com/moshcoder/moshcode' },
-      { label: 'Commands', href: '/commands' },
-      { label: 'Blog', href: '/blog' },
-      { label: 'Install script', href: '/install.sh' },
-      { label: 'For agents (llms.txt)', href: '/llms.txt' },
-    ],
-  },
-  {
-    heading: 'the Pit',
-    links: [
-      { label: 'Moshpit Manager', href: 'https://app.moshcode.sh/pit' },
-      { label: 'pit.moshcode.sh', href: 'https://pit.moshcode.sh' },
-      { label: 'app.moshcode.sh', href: 'https://app.moshcode.sh' },
-      { label: 'Moshpit DNS', href: 'https://dns.moshcode.sh/dns-query' },
-      { label: 'moshcoding.com', href: 'https://moshcoding.com' },
-    ],
-  },
-  {
-    heading: 'elsewhere',
-    links: [
-      { label: 'X / chovy', href: 'https://x.com/chovy' },
-      { label: 'Bluesky', href: 'https://bsky.app/profile/moshcoding.bsky.social' },
-      { label: 'YouTube', href: 'https://youtube.com/@moshcoding' },
-      { label: 'Twitch', href: 'https://www.twitch.tv/chovyo' },
-    ],
-  },
+  { label: 'GitHub', href: 'https://github.com/moshcoder/moshcode' },
+  { label: 'Commands', href: '/commands' },
+  { label: 'Blog', href: '/blog' },
+  { label: 'install.sh', href: '/install.sh' },
+  { label: 'llms.txt', href: '/llms.txt' },
 ];
