@@ -245,6 +245,12 @@
       "summary": "mint a short link on the pit — /f/<code> follows to your url"
     },
     {
+      "name": "deploy",
+      "aliases": [],
+      "group": "hosting",
+      "summary": "upload a folder to your Moshpit server — it opens at <name> and <name>.pit.world"
+    },
+    {
       "name": "games",
       "aliases": [
         "game",

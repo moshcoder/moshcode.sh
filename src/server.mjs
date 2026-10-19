@@ -1,5 +1,6 @@
 import express from 'express';
 import { randomBytes } from 'node:crypto';
+import { footerHtml } from '@profullstack/footer';
 import { readFileSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -76,12 +77,19 @@ export function createApp() {
     res.json({ status: 'ok', version: VERSION, commands: COMMANDS.commands.length }),
   );
 
-  // The pit.world global footer, fetched server-side (cached 1 h, served stale
-  // or as nothing when pit.world is slow or down) into the <!--pit-footer-->
-  // slot every page's foot() leaves. Its <style> gets this response's nonce.
+  // Two footers fill the slots every page's foot() leaves, both server-side:
+  // <!--pfs-footer--> gets the shared Profullstack footer (webring + copyright)
+  // from @profullstack/footer's @latest template (the ring verifier reads raw
+  // HTML), and <!--pit-footer--> the pit.world global footer (cached 1 h,
+  // served stale or as nothing when pit.world is slow or down), last in <body>.
+  // Both inline <style>s get this response's nonce.
   const withFooter = async (res, body) => {
-    const snippet = (await pitFooter()).replace(/<style>/g, `<style nonce="${res.locals.nonce}">`);
-    return body.replace('<!--pit-footer-->', () => snippet);
+    const [ring, pit] = await Promise.all([
+      footerHtml({ site: 'https://moshcode.sh/', nonce: res.locals.nonce }),
+      pitFooter(),
+    ]);
+    const snippet = pit.replace(/<style>/g, `<style nonce="${res.locals.nonce}">`);
+    return body.replace('<!--pfs-footer-->', () => ring).replace('<!--pit-footer-->', () => snippet);
   };
 
   const html = async (res, body) =>
