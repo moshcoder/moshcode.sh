@@ -161,3 +161,13 @@ test('nav section links are absolute, so they work off the home page', async () 
   assert.match(res.body, /href="\/#herd"/);
   assert.doesNotMatch(res.body, /href="#herd"/);
 });
+
+test('every public page carries exactly one CrawlProof ad frame, allowed by the CSP', async () => {
+  for (const path of ['/', '/commands', '/blog']) {
+    const res = await get(path);
+    assert.equal(res.status, 200, path);
+    const frames = res.body.match(/crawlproof\.com\/api\/ads\/frame\?slot=71955dcb-8cb9-46fe-8df5-e870d973a8e2&amp;format=text_link/g) ?? [];
+    assert.equal(frames.length, 1, `${path} has one ad frame`);
+    assert.match(res.headers.get('content-security-policy'), /frame-src https:\/\/crawlproof\.com/);
+  }
+});

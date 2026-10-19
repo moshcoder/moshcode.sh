@@ -26,6 +26,18 @@
       "summary": "launch an engine with its native defaults"
     },
     {
+      "name": "oneshot",
+      "aliases": [],
+      "group": "engines",
+      "summary": "run one prompt on one engine (CLI or API: zai, perplexity, fugu) and print the answer"
+    },
+    {
+      "name": "hooks",
+      "aliases": [],
+      "group": "engines",
+      "summary": "fan-out prompt runner: a signed webhook in, one signed result per engine back out"
+    },
+    {
       "name": "herd",
       "aliases": [],
       "group": "runtime",
@@ -48,6 +60,12 @@
       "aliases": [],
       "group": "runtime",
       "summary": "the OpenFleet sysop tool: open a fleet, cap it, see the tree, stop a swarm, read the ledger (PRD 0016)"
+    },
+    {
+      "name": "work",
+      "aliases": [],
+      "group": "runtime",
+      "summary": "a queue of tasks that carry their own verify command, drained by headless workers; you see only the inbox (PRD 0021)"
     },
     {
       "name": "handoff",
@@ -175,7 +193,7 @@
       "name": "export",
       "aliases": [],
       "group": "account",
-      "summary": "operator only: export the app's users as CSV, optionally cleaned"
+      "summary": "operator only: export users as CSV (this app, or --all properties), optionally cleaned"
     },
     {
       "name": "console",

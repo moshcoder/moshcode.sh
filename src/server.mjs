@@ -40,7 +40,7 @@ export function createApp() {
       'Referrer-Policy': 'strict-origin-when-cross-origin',
       'Strict-Transport-Security': 'max-age=31536000; includeSubDomains',
       'Content-Security-Policy':
-        `default-src 'self'; script-src 'self' https://crawlproof.com; style-src 'self' 'nonce-${res.locals.nonce}'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://crawlproof.com; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'`,
+        `default-src 'self'; script-src 'self' https://crawlproof.com; style-src 'self' 'nonce-${res.locals.nonce}'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://crawlproof.com; frame-src https://crawlproof.com; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'`,
       'Permissions-Policy': 'camera=(), microphone=(), geolocation=(), interest-cohort=()',
     });
     next();
