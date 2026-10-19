@@ -112,6 +112,7 @@ export function foot() {
     <nav aria-label="Footer">${FOOTER_LINKS.map((l) => `<a href="${esc(l.href)}">${esc(l.label)}</a>`).join('')}</nav>
   </div>
 </footer>
+<!--pfs-footer-->
 <script src="/app.js" defer></script>
 <!--pit-footer-->
 </body>

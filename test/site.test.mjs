@@ -171,3 +171,10 @@ test('every public page carries exactly one CrawlProof ad frame, allowed by the 
     assert.match(res.headers.get('content-security-policy'), /frame-src https:\/\/crawlproof\.com/);
   }
 });
+
+test('home page server-renders the Profullstack webring row', async () => {
+  const res = await get('/');
+  // The ring verifier reads raw HTML and never runs script.
+  assert.match(res.body, /rssamplifier\.com\/ring\/profullstack/);
+  assert.doesNotMatch(res.body, /<!--pfs-footer-->/);
+});
