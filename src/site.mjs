@@ -87,8 +87,25 @@ ${extraHead}
 <main id="main">`;
 }
 
+// One CrawlProof ad unit (slot 71955dcb, https://crawlproof.com/ads/slots) on
+// every public page, above the footer. This site's CSP allows no inline style
+// and only 'self' images, and ad.js renders into a srcdoc iframe that would
+// inherit that policy, so it uses the script-free cross-origin frame instead:
+// one frame-src entry, no third-party JS, nothing written to localStorage.
+// text_link is the only fluid format (40px at any width, its own "Sponsored"
+// mark), so it never crops on a phone and needs no viewport measurement.
+export const AD_SLOT = '71955dcb-8cb9-46fe-8df5-e870d973a8e2';
+export const AD_FRAME_SRC = `https://crawlproof.com/api/ads/frame?slot=${AD_SLOT}&format=text_link`;
+
+export function adUnit() {
+  return `<aside class="cp-ad wrap" aria-label="Advertisement">
+  <iframe src="${esc(AD_FRAME_SRC)}" title="Advertisement" height="40" loading="lazy" scrolling="no" sandbox="allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"></iframe>
+</aside>`;
+}
+
 export function foot() {
-  return `</main>
+  return `${adUnit()}
+</main>
 <footer class="foot">
   <div class="wrap foot-grid">
     <div class="foot-brand">
