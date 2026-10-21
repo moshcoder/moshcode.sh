@@ -85,11 +85,12 @@ ${extraHead}
   </div>
 </header>
 <main id="main">
-${adUnit()}`;
+${path === '/' ? '' : adUnit()}`;
 }
 
 // One CrawlProof ad unit (slot 71955dcb, https://crawlproof.com/ads/slots) on
-// every public page, at the top of the content (never against the footer). This site's CSP allows no inline style
+// every public page except the homepage, at the top of the content (never
+// against the footer). This site's CSP allows no inline style
 // and only 'self' images, and ad.js renders into a srcdoc iframe that would
 // inherit that policy, so it uses the script-free cross-origin frame instead:
 // one frame-src entry, no third-party JS, nothing written to localStorage.
