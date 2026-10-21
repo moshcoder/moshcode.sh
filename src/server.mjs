@@ -8,6 +8,7 @@ import { renderHome, renderCommands, renderNotFound, renderLlmsTxt } from './sit
 import { renderBlogIndex, renderPost, renderFeed } from './blog.mjs';
 import { POSTS_BY_SLUG, POSTS_NEWEST_FIRST } from './posts.mjs';
 import { SITE } from './content.mjs';
+import { createCrawlGate, crawlMiddleware } from './crawl.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const COMMANDS = JSON.parse(readFileSync(resolve(ROOT, 'data/commands.json'), 'utf8'));
@@ -54,10 +55,14 @@ async function pitFooter() {
   return pitCache.html;
 }
 
-export function createApp() {
+export function createApp({ crawlGate = createCrawlGate() } = {}) {
   const app = express();
   app.disable('x-powered-by');
   app.set('etag', 'strong');
+
+  // Training crawlers buy a day pass before anything else, and ahead of the
+  // CSP below (its form-action 'self' would block the checkout redirect).
+  if (crawlGate) app.use(crawlMiddleware(crawlGate));
 
   app.use((_req, res, next) => {
     // Per-response nonce for the one inline <style> the pit.world footer carries.
