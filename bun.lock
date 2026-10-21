@@ -6,12 +6,17 @@
       "name": "moshcode.sh",
       "dependencies": {
         "@profullstack/footer": "latest",
+        "@profullstack/x402-gateway": "^0.11.0",
         "express": "5.1.0",
       },
     },
   },
   "packages": {
     "@profullstack/footer": ["@profullstack/footer@0.2.1", "", { "peerDependencies": { "react": ">=18" }, "optionalPeers": ["react"], "bin": { "profullstack-footer": "bin/profullstack-footer.js" } }, "sha512-KHmKVwrlzCBrSAAJ4zobNFCxTg8VF0gvNMeAut00dX3+gbWCtk6eOwIR2AaqEC7smj6Aio6cIexzt/dUnv1McA=="],
+
+    "@profullstack/keys": ["@profullstack/keys@0.1.0", "", {}, "sha512-Vys47LvS5ivhdZu4SYOxh9Le3DEmWhjP0+CtrU45RhXAbY0ZFG/2Dk9V1bIIUGDp8UWMJqctvUD21JrNjfh04w=="],
+
+    "@profullstack/x402-gateway": ["@profullstack/x402-gateway@0.11.0", "", { "dependencies": { "@profullstack/keys": "^0.1.0" } }, "sha512-Lfrz+SRTwQZfcoCaVtaaMNPJx74Lp/5oyS7vJJAEuJmH1TjBzhE7dWquISkj1p42oc+VW5I9xH9p7YhEKqmr4Q=="],
 
     "accepts": ["accepts@2.0.0", "", { "dependencies": { "mime-types": "^3.0.0", "negotiator": "^1.0.0" } }, "sha512-5cvg6CtKwfgdmVqY1WIiXKc3Q1bkRqGLi+2W/6ao+6Y7gu/RCwRuAhGEzh5B4KlszSuTLgZYuqFqo5bImjNKng=="],
 
