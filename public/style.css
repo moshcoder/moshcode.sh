@@ -272,5 +272,5 @@ h1 {
 
 /* CrawlProof text_link frame at the top of the content: fluid, 40px, carries its own
    "Sponsored" mark. */
-.cp-ad { margin-top: 24px; margin-bottom: 24px; }
+.cp-ad { margin-top: 8px; margin-bottom: 8px; }
 .cp-ad iframe { display: block; width: 100%; height: 40px; border: 0; }
