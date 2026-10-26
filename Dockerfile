@@ -1,6 +1,6 @@
 # moshcode.sh on Bun. Contract with dev2, unchanged from the Node image: listens on
 # $PORT (3000) on $HOST, answers /healthz, no secrets needed.
-FROM oven/bun:1.4.0-slim
+FROM oven/bun:1.4.4-slim
 WORKDIR /app
 COPY --chown=bun:bun package.json bun.lock ./
 RUN bun install --frozen-lockfile --production
