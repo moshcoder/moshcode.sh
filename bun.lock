@@ -6,7 +6,7 @@
       "name": "moshcode.sh",
       "dependencies": {
         "@profullstack/footer": "latest",
-        "@profullstack/x402-gateway": "^0.15.3",
+        "@profullstack/x402-gateway": "^0.16.0",
         "express": "5.3.0",
       },
     },
@@ -16,7 +16,7 @@
 
     "@profullstack/keys": ["@profullstack/keys@0.1.0", "", {}, "sha512-Vys47LvS5ivhdZu4SYOxh9Le3DEmWhjP0+CtrU45RhXAbY0ZFG/2Dk9V1bIIUGDp8UWMJqctvUD21JrNjfh04w=="],
 
-    "@profullstack/x402-gateway": ["@profullstack/x402-gateway@0.15.3", "", { "dependencies": { "@profullstack/keys": "^0.1.0" } }, "sha512-YtxaHuiNdnEmwQBkNJXGOEvFUb+5k54GPeZw5RiPKqYcKrA/tRTRVTMbyuX4XSGfmaOEo1BCGpa3w8S46+YQUg=="],
+    "@profullstack/x402-gateway": ["@profullstack/x402-gateway@0.16.0", "", { "dependencies": { "@profullstack/keys": "^0.1.0" } }, "sha512-3xN7vlGXmoqdexR7NNAIExZLtYvE5M8nR9fqr7kwLK/xks06lUiymEsjZOc2wCbowfnCVNiZBOe98rvsCE9Mgw=="],
 
     "accepts": ["accepts@2.0.0", "", { "dependencies": { "mime-types": "^3.0.0", "negotiator": "^1.0.0" } }, "sha512-5cvg6CtKwfgdmVqY1WIiXKc3Q1bkRqGLi+2W/6ao+6Y7gu/RCwRuAhGEzh5B4KlszSuTLgZYuqFqo5bImjNKng=="],
 
