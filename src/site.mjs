@@ -1,7 +1,7 @@
 // Server-side rendering for moshcode.sh. Every page is a string — no client
 // framework, no hydration, one stylesheet and ~1KB of JS for the copy buttons.
 
-import { SITE, NAV, ENGINES, STATS, SECTIONS, FOOTER_LINKS } from './content.mjs';
+import { SITE, NAV, ENGINES, STATS, SECTIONS } from './content.mjs';
 
 // head/foot/terminal/installBox/esc are exported for src/blog.mjs, which builds
 // the blog pages out of the same chrome rather than a second set of markup.
@@ -109,12 +109,6 @@ export function adUnit() {
 
 export function foot() {
   return `</main>
-<footer class="foot">
-  <div class="wrap foot-row">
-    <p class="brand"><span class="brand-mark" aria-hidden="true">▚</span> moshcode <span class="muted">· MIT licensed</span></p>
-    <nav aria-label="Footer">${FOOTER_LINKS.map((l) => `<a href="${esc(l.href)}">${esc(l.label)}</a>`).join('')}</nav>
-  </div>
-</footer>
 <!--pfs-footer-->
 <script src="/app.js" defer></script>
 <!--pit-footer-->
