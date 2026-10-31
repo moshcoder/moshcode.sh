@@ -7,7 +7,7 @@ import { fileURLToPath } from 'node:url';
 import { renderHome, renderCommands, renderNotFound, renderLlmsTxt } from './site.mjs';
 import { renderBlogIndex, renderPost, renderFeed } from './blog.mjs';
 import { POSTS_BY_SLUG, POSTS_NEWEST_FIRST } from './posts.mjs';
-import { SITE } from './content.mjs';
+import { SITE, FOOTER_LINKS } from './content.mjs';
 import { createCrawlGate, crawlMiddleware } from './crawl.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -82,15 +82,19 @@ export function createApp({ crawlGate = createCrawlGate() } = {}) {
     res.json({ status: 'ok', version: VERSION, commands: COMMANDS.commands.length }),
   );
 
-  // Two footers fill the slots every page's foot() leaves, both server-side:
-  // <!--pfs-footer--> gets the shared Profullstack footer (webring + copyright)
-  // from @profullstack/footer's @latest template (the ring verifier reads raw
-  // HTML), and <!--pit-footer--> the pit.world global footer (cached 1 h,
-  // served stale or as nothing when pit.world is slow or down), last in <body>.
-  // Both inline <style>s get this response's nonce.
+  // The shared Profullstack footer is the one site footer; it carries the
+  // product links that used to live in site.mjs. The legacy network snippet
+  // stays last in the HTML and is suppressed by the shared template.
   const withFooter = async (res, body) => {
     const [ring, pit] = await Promise.all([
-      footerHtml({ site: 'https://moshcode.sh/', nonce: res.locals.nonce }),
+      footerHtml({
+        site: 'https://moshcode.sh/',
+        name: 'moshcode',
+        owner: { name: 'moshcode', url: 'https://moshcode.sh/' },
+        tagline: 'MIT licensed CLI for agentic coding',
+        links: FOOTER_LINKS,
+        nonce: res.locals.nonce,
+      }),
       pitFooter(),
     ]);
     const snippet = pit.replace(/<style>/g, `<style nonce="${res.locals.nonce}">`);
