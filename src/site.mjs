@@ -72,6 +72,7 @@ export function head({ title, description, path, extraHead = '' }) {
 <link rel="stylesheet" href="/style.css">
 <script src="/pwa-register.js" defer></script>
 <script data-site="7fdf1cb0-2240-4709-8896-63262cb35f7f" src="https://crawlproof.com/stats.js" async></script>
+<script type="module" data-webmcp src="https://cdn.jsdelivr.net/npm/@profullstack/webmcp@0/src/embed.js" data-pages='{"home":"/","commands":"/commands","blog":"/blog"}'></script>
 ${extraHead}
 </head>
 <body>

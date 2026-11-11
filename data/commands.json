@@ -211,7 +211,7 @@
       "name": "name",
       "aliases": [],
       "group": "hosting",
-      "summary": "prove you hold a Moshpit name, so an app can use it as your identity"
+      "summary": "prove you hold a Moshpit name, or serve it from a c0mpute site"
     },
     {
       "name": "doh",
