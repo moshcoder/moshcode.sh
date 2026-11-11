@@ -270,4 +270,6 @@ export const FOOTER_LINKS = [
   { label: 'Blog', href: '/blog' },
   { label: 'install.sh', href: '/install.sh' },
   { label: 'llms.txt', href: '/llms.txt' },
+  { label: 'Privacy', href: '/privacy' },
+  { label: 'Terms', href: '/terms' },
 ];

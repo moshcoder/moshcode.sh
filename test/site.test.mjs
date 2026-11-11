@@ -184,3 +184,19 @@ test('home page server-renders the Profullstack webring row', async () => {
   assert.match(res.body, /rssamplifier\.com\/ring\/profullstack/);
   assert.doesNotMatch(res.body, /<!--pfs-footer-->/);
 });
+
+test('legal pages render without an ad, and the footer links them', async () => {
+  for (const [path, heading] of [['/privacy', 'Privacy Policy'], ['/terms', 'Terms of Service']]) {
+    const res = await get(path);
+    assert.equal(res.status, 200);
+    assert.match(res.body, new RegExp(`<h1>${heading}</h1>`));
+    assert.match(res.body, new RegExp(`<title>${heading}`));
+    assert.match(res.body, /Effective date: November 11, 2026/);
+    assert.doesNotMatch(res.body, /cp-ad/);
+    assert.doesNotMatch(res.body.replace(/<footer[\s\S]*$/, ''), /[–—]/);
+  }
+  assert.match((await get('/privacy')).body, /app\.moshcode\.sh\/mcp/);
+  const home = await get('/');
+  assert.match(home.body, /href="\/privacy"/);
+  assert.match(home.body, /href="\/terms"/);
+});

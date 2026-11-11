@@ -2,6 +2,7 @@
 // framework, no hydration, one stylesheet and ~1KB of JS for the copy buttons.
 
 import { SITE, NAV, ENGINES, STATS, SECTIONS } from './content.mjs';
+import { LEGAL_EFFECTIVE, PRIVACY_HTML, TERMS_HTML } from './legal.mjs';
 
 // head/foot/terminal/installBox/esc are exported for src/blog.mjs, which builds
 // the blog pages out of the same chrome rather than a second set of markup.
@@ -45,7 +46,7 @@ function section(s, i) {
 </section>`;
 }
 
-export function head({ title, description, path, extraHead = '' }) {
+export function head({ title, description, path, extraHead = '', ad = true }) {
   const canonical = `https://${SITE.domain}${path}`;
   return `<!doctype html>
 <html lang="en">
@@ -88,7 +89,7 @@ ${extraHead}
   </div>
 </header>
 <main id="main">
-${path === '/' ? '' : adUnit()}`;
+${path === '/' || !ad ? '' : adUnit()}`;
 }
 
 // One CrawlProof ad unit (slot 71955dcb, https://crawlproof.com/ads/slots) on
@@ -268,4 +269,29 @@ ${data.commands.map((c) => `- moshcode ${c.name}${c.aliases.length ? ` (${c.alia
 
 Every command has help: moshcode help <command>, or moshcode help --json.
 `;
+}
+
+/** /privacy and /terms: the moshcode product's policy, shared with app.moshcode.sh. No ad. */
+export function renderLegal(kind) {
+  const privacy = kind === 'privacy';
+  const title = privacy ? 'Privacy Policy' : 'Terms of Service';
+  const other = privacy ? '<a href="/terms">Terms of Service</a>' : '<a href="/privacy">Privacy Policy</a>';
+  return `${head({
+    title: `${title} · moshcode`,
+    description: `${title} for moshcode.sh, app.moshcode.sh and the moshcode MCP server.`,
+    path: `/${kind}`,
+    ad: false,
+  })}
+<section class="page-head">
+  <div class="wrap">
+    <p class="kicker">legal · Effective date: ${LEGAL_EFFECTIVE} · ${other}</p>
+    <h1>${title}</h1>
+  </div>
+</section>
+<section class="band">
+  <div class="wrap prose">
+    ${privacy ? PRIVACY_HTML : TERMS_HTML}
+  </div>
+</section>
+${foot()}`;
 }

@@ -4,7 +4,7 @@ import { footerHtml } from '@profullstack/footer';
 import { readFileSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { renderHome, renderCommands, renderNotFound, renderLlmsTxt } from './site.mjs';
+import { renderHome, renderCommands, renderNotFound, renderLlmsTxt, renderLegal } from './site.mjs';
 import { renderBlogIndex, renderPost, renderFeed } from './blog.mjs';
 import { POSTS_BY_SLUG, POSTS_NEWEST_FIRST } from './posts.mjs';
 import { SITE, FOOTER_LINKS } from './content.mjs';
@@ -26,6 +26,8 @@ const PAGES = [
   { path: '/', changefreq: 'weekly', priority: '1.0' },
   { path: '/commands', changefreq: 'weekly', priority: '0.8' },
   { path: '/blog', changefreq: 'weekly', priority: '0.8' },
+  { path: '/privacy', changefreq: 'yearly', priority: '0.2' },
+  { path: '/terms', changefreq: 'yearly', priority: '0.2' },
 ];
 
 const PIT_FOOTER_URL = 'https://pit.world/snippets/footer.html?site=moshcode.sh';
@@ -130,6 +132,9 @@ export function createApp({ crawlGate = createCrawlGate() } = {}) {
     if (!post) return next();
     return html(res, renderPost(post));
   });
+
+  app.get('/privacy', (_req, res) => html(res, renderLegal('privacy')));
+  app.get('/terms', (_req, res) => html(res, renderLegal('terms')));
 
   app.get(['/install.sh', '/install'], (_req, res) => res.redirect(302, INSTALLER));
 
