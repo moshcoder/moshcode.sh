@@ -44,3 +44,11 @@ test('a browser and the health check are not charged', async () => {
   assert.equal((await get('/', CHROME)).status, 200);
   assert.equal((await get('/healthz', { 'user-agent': GPT })).status, 200);
 });
+
+test('legal pages are open to crawlers and browsers alike', async () => {
+  const CLAUDEBOT = 'Mozilla/5.0 (compatible; ClaudeBot/1.0; +claudebot@anthropic.com)';
+  for (const path of ['/privacy', '/terms']) {
+    for (const ua of [GPT, CLAUDEBOT]) assert.equal((await get(path, { 'user-agent': ua })).status, 200, `${path} ${ua}`);
+    assert.equal((await get(path, CHROME)).status, 200);
+  }
+});
