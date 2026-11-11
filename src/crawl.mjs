@@ -16,7 +16,9 @@ export function createCrawlGate(env = process.env) {
     coinpay: { apiKey },
     payTo,
     contact: 'mailto:anthony@profullstack.com',
-    openPaths: ['/healthz', '/llms.txt', '/install.sh', '/install', '/commands.json', '/blog/rss.xml', '/blog/feed.xml'],
+    openPaths: ['/healthz', '/llms.txt', '/install.sh', '/install', '/commands.json', '/blog/rss.xml', '/blog/feed.xml',
+      // The legal pages: a connector directory's review crawler must read them.
+      '/privacy', '/terms'],
   });
 }
 
